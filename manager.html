@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MatchEngine</title>
+    <link rel="icon" href="icon.png" type="image/x-icon"/>    
+    <icon src="icon.png"/>
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <style>
+    body{
+        font-family: 'Sulphur Point';
+        text-align: center;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    }
+    .main{
+        display: block;
+        height: auto;
+        padding: 5px;
+        width: 60%;
+        border: 3px solid black;
+        border-radius: 10px;
+        margin: auto;
+        margin-top: 10px;
+    }
+    input{
+        height: 20px;
+        margin-top: 5px;
+    }
+    button{
+        width: 200px;
+        height: 30px;
+        border: 3px solid rgb(0, 255, 179);
+        background-color: rgb(0, 255, 179);
+        border-radius: 10px;
+        transition: 0.2s;
+    }
+    button:hover{
+        background-color: #fff;
+        cursor: pointer;
+    }
+    .teams{
+        display: inline-block;
+        border: 2px solid black;
+        width: 130px;
+        vertical-align:middle;
+        margin: 2px;
+        transition: 0.3s;
+    }
+    .teams:hover{
+        background-color: rgb(0, 255, 179);
+        cursor: pointer;
+    }
+    .tactic{
+        display: inline-block;
+        border: 2px solid black;
+        width: 150px;
+        vertical-align:middle;
+        margin: 2px;
+        transition: 0.3s;
+    }
+    .tactic:hover{
+        background-color: rgb(0, 255, 179);
+        cursor: pointer;
+    }
+    .float{display: none;}
+    .tabheader{
+        width: 30%;
+        display: inline-block;
+        border: 1px solid black;
+        transition: 0.3s;
+        cursor: pointer;
+        margin: -1px;
+        height: 30px;
+        line-height: 30px;
+    }
+    #team{
+        background-color: rgb(0, 255, 179);
+    }
+    #teams{display: block;}
+    #tactics{display: none;}
+    #extras{display: none;}
+    .extra{
+        display: block;
+        border: 2px solid black;
+        width: 90%;
+        margin: auto;
+        margin-top: 2px;
+        transition: 0.3s;
+        height: 23px;
+    }
+    .extra:hover{
+        background-color: rgb(0, 255, 179);
+        cursor: pointer;
+    }
+    .left{
+        float: left;
+        height: 20px;
+        margin: 2px;
+        margin-left: 5px;
+    }
+    .right{
+        float: right;
+        height: 20px;
+        margin: 2px;
+        margin-right:5px;
+    }
+    .tabcontent{
+        width: 90%;
+        margin: auto;
+        margin-top: 0px;
+        height: auto;
+        border: 1px solid black;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    #timewaste-e{display: none;}
+    #bribing-e{display: none;}
+    #diving-e{display: none;}
+    #extreme-e{display: none;}
+    #star-e{display: none;}
+    img:hover{cursor: pointer;}
+    @media screen and (max-width: 800px){
+        .float{display: block;}
+        .extra{height: 50px;}
+        .left{vertical-align: middle; width: 40%;}
+        .right{vertical-align: middle; width: 40%;}
+    }
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    </style>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body oncontextmenu="return false" onload="reload()">
+    <img src="icon.png" height="100px" onclick="window.location.assign('../index.html')">
+    <h1>MatchEngine Manager</h1>
+    <section class="main">
+        <h3>Manage Team</h3>
+        <div class="tabheader" onclick="setTeam()" id="team">Team</div><div class="tabheader" onclick="setTactic()" id="tactic">Tactics</div><div class="tabheader" onclick="setExtras()" id="extra">Extras</div>
+        <br>
+        <div class="tabcontent" id="teams">
+            <div id="active"></div>
+            <div class="teams" onclick="var team = 'Arsenal'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Arsenal</div>
+            <div class="teams" onclick="var team = 'AFC Bournemouth'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">AFC Bournemouth</div>
+            <div class="teams" onclick="var team = 'Aston Villa'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Aston Villa</div>
+            <div class="teams" onclick="var team = 'Brighton and Hove Albion'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Brighton</div>
+            <br>
+            <div class="teams" onclick="var team = 'Burnley'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Burnley</div>
+            <div class="teams" onclick="var team = 'Chelsea'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Chelsea</div>
+            <div class="teams" onclick="var team = 'Crystal Palace'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Crystal Palace</div>
+            <div class="teams" onclick="var team = 'Everton'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Everton</div>
+            <br>
+            <div class="teams" onclick="var team = 'Leicester City'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Leicester</div>
+            <div class="teams" onclick="var team = 'Liverpool'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Liverpool</div>
+            <div class="teams" onclick="var team = 'Manchester City'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Man City</div>
+            <div class="teams" onclick="var team = 'Manchester United'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Man Utd</div>
+            <br>
+            <div class="teams" onclick="var team = 'Newcastle United'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Newcastle</div>
+            <div class="teams" onclick="var team = 'Norwich City'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Norwich</div>
+            <div class="teams" onclick="var team = 'Sheffield United'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Sheffield Utd</div>
+            <div class="teams" onclick="var team = 'Southampton'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Southampton</div>
+            <br>
+            <div class="teams" onclick="var team = 'Tottenham Hotspur'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Spurs</div>
+            <div class="teams" onclick="var team = 'Watford'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Watford</div>
+            <div class="teams"  onclick="var team = 'West Ham United'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">West Ham</div>
+            <div class="teams" onclick="var team = 'Wolves'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Wolves</div>
+            <br>
+            <div class="teams" onclick="var team = 'Leeds United'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Leeds</div>
+            <div class="teams" onclick="var team = 'West Bromwich Albion'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">West Brom</div>
+            <div class="teams" onclick="var team = 'Ipswich Town'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Ipswich</div>
+            <div class="teams" onclick="var team = 'Legends FC'; document.getElementById('active').innerHTML = 'Active Team: '+team; window.localStorage.setItem('team', team)">Legends FC</div>
+        </div>
+        <div class="tabcontent" id="tactics">
+            <div id="mentality">Active Mentality:</div>
+            <div class="tactic" onclick="var mentality = 'Attacking'; document.getElementById('mentality').innerHTML = 'Active Mentality: '+mentality; window.localStorage.setItem('mentality', mentality)">Attacking</div>
+            <div class="tactic" onclick="var mentality = 'Neutral'; document.getElementById('mentality').innerHTML = 'Active Mentality: '+mentality; window.localStorage.setItem('mentality', mentality)">Neutral</div>
+            <div class="tactic" onclick="var mentality = 'Defensive'; document.getElementById('mentality').innerHTML = 'Active Mentality: '+mentality; window.localStorage.setItem('mentality', mentality)">Defensive</div>
+            <br>
+            <div id="play">Active Play Style:</div>
+            <div class="tactic" onclick="var play = 'Possesion'; document.getElementById('play').innerHTML = 'Active Play Style: '+play; window.localStorage.setItem('play', play)">Possesion</div>
+            <div class="tactic" onclick="var play = 'Direct'; document.getElementById('play').innerHTML = 'Active Play Style: '+play; window.localStorage.setItem('play', play)">Direct</div>
+            <div class="tactic" onclick="var play = 'Counter Attack'; document.getElementById('play').innerHTML = 'Active Play Style: '+play; window.localStorage.setItem('play', play)">Counter Attack</div>
+            <br>
+            <div id="passing">Active Passing Style:</div>
+            <div class="tactic" onclick="var passing = 'Short'; document.getElementById('passing').innerHTML = 'Active Passing Style: '+passing; window.localStorage.setItem('passing', passing)">Short</div>
+            <div class="tactic" onclick="var passing = 'Mixed'; document.getElementById('passing').innerHTML = 'Active Passing Style: '+passing; window.localStorage.setItem('passing', passing)">Mixed</div>
+            <div class="tactic" onclick="var passing = 'Long'; document.getElementById('passing').innerHTML = 'Active Passing Style: '+passing; window.localStorage.setItem('passing', passing)">Long</div>
+            <br>
+            <div id="aggression">Active Aggression:</div>
+            <div class="tactic" onclick="var aggression = 'Aggressive'; document.getElementById('aggression').innerHTML = 'Active Aggression: '+aggression; window.localStorage.setItem('aggression', aggression)">Aggressive</div>
+            <div class="tactic" onclick="var aggression = 'Balanced'; document.getElementById('aggression').innerHTML = 'Active Aggression: '+aggression; window.localStorage.setItem('aggression', aggression)">Balanced</div>
+            <div class="tactic" onclick="var aggression = 'Soft'; document.getElementById('aggression').innerHTML = 'Active Aggression: '+aggression; window.localStorage.setItem('aggression', aggression)">Soft</div>
+            <br>
+            <div id="pressing">Active Pressing Style:</div>
+            <div class="tactic" onclick="var pressing = 'High Press'; document.getElementById('pressing').innerHTML = 'Active Pressing Style: '+pressing; window.localStorage.setItem('pressing', pressing)">High Press</div>
+            <div class="tactic" onclick="var pressing = 'Balanced Press'; document.getElementById('pressing').innerHTML = 'Active Pressing Style: '+pressing; window.localStorage.setItem('pressing', pressing)">Balanced Press</div>
+            <div class="tactic" onclick="var pressing = 'Sit Back'; document.getElementById('pressing').innerHTML = 'Active Pressing Style: '+pressing; window.localStorage.setItem('pressing', pressing)">Sit Back</div>
+        </div>
+        <div class="tabcontent" id="extras">
+            <div>Currencey: <em style="font-style: normal;" id="coins"></em> <i class='fas fa-circle' style='color:gold'></i></div>
+            <div class="extra" onclick="setTimewaste(coins)" id="timewaste">
+                <div class="left">Time Wasting</div>
+                <div class="right">12 <i class='fas fa-circle' style='color:gold'></i></div>
+            </div>
+            <div class="extra" onclick="setDiving(coins)" id="diving">
+                <div class="left">Diving</div>
+                <div class="right">5 <i class='fas fa-circle' style='color:gold'></i></div>
+            </div>
+            <div class="extra" onclick="setReferee(coins)" id="bribing">
+                <div class="left">Bribe the Referee</div>
+                <div class="right">18 <i class='fas fa-circle' style='color:gold'></i></div>
+            </div>
+            <div class="extra" onclick="setExtremeaggression(coins)" id="extreme">
+                <div class="left">Extreme Aggression</div>
+                <div class="right">3 <i class='fas fa-circle' style='color:gold'></i></div>
+            </div>
+            <div class="extra" onclick="setStar(coins)" id="star">
+                <div class="left">Sign Star Player</div>
+                <div class="right">25 <i class='fas fa-circle' style='color:gold'></i></div>
+            </div>
+            <div>Equipped Extras:</div>
+            <div class="extra" id="timewaste-e" onclick="sellTimewaste(coins)">
+                <div class="left">Time Wasting</div>
+                <div class="right">11 <i class='fas fa-circle' style='color:red'></i></div>
+            </div>
+            <div class="extra" id="diving-e" onclick="sellDiving(coins)">
+                <div class="left">Diving</div>
+                <div class="right">8 <i class='fas fa-circle' style='color:red'></i></div>
+            </div>
+            <div class="extra" id="bribing-e" onclick="sellBribing(coins)">
+                <div class="left">Bribe the Referee</div>
+                <div class="right">17 <i class='fas fa-circle' style='color:red'></i></div>
+            </div>
+            <div class="extra" id="extreme-e" onclick="sellExtreme(coins)">
+                <div class="left">Extreme Aggression</div>
+                <div class="right">2 <i class='fas fa-circle' style='color:red'></i></div>
+            </div>
+            <div class="extra" id="star-e" onclick="sellStar(coins)">
+                <div class="left">Sell Star Player</div>
+                <div class="right">24 <i class='fas fa-circle' style='color:red'></i></div>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <button id="Generate" onclick="window.location.assign('match.html')">Generate Match</button>
+    </section>
+</body>
+</html>
+<script>
+    //DISABLE CODE INSPECT
+    document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+    }
+    }
+</script>
+<script>
+    function setTeam(){
+        document.getElementById("tactic").style.backgroundColor = "white";
+        document.getElementById("extra").style.backgroundColor = "white";
+        document.getElementById("team").style.backgroundColor = "rgb(0, 255, 179)";
+        document.getElementById("teams").style.display = "block";
+        document.getElementById("tactics").style.display = "none";
+        document.getElementById("extras").style.display = "none";
+        window.sessionStorage.setItem("tab", "a");
+    }
+    function setTactic(){
+        document.getElementById("team").style.backgroundColor = "white";
+        document.getElementById("extra").style.backgroundColor = "white";
+        document.getElementById("tactic").style.backgroundColor = "rgb(0, 255, 179)";
+        document.getElementById("teams").style.display = "none";
+        document.getElementById("tactics").style.display = "block";
+        document.getElementById("extras").style.display = "none";
+        window.sessionStorage.setItem("tab", "b");
+    }
+    function setExtras(){
+        document.getElementById("tactic").style.backgroundColor = "white";
+        document.getElementById("team").style.backgroundColor = "white";
+        document.getElementById("extra").style.backgroundColor = "rgb(0, 255, 179)";
+        document.getElementById("teams").style.display = "none";
+        document.getElementById("tactics").style.display = "none";
+        document.getElementById("extras").style.display = "block";
+        window.sessionStorage.setItem("tab", "c");
+    }
+
+    var coinsStorage = localStorage.getItem("coins");
+    if (coinsStorage==null){
+        localStorage.setItem("coins", 10);
+        var coins = localStorage.getItem("coins");
+    }
+    else{
+        var coins = localStorage.getItem("coins");
+    }
+    document.getElementById("coins").innerHTML = coins;
+    function reset(){
+        localStorage.setItem("coins", 10);
+        localStorage.setItem("timewaste", "off");
+        localStorage.setItem("diving", "off");
+        localStorage.setItem("bribing", "off");
+        localStorage.setItem("extreme", "off");
+    }
+
+
+    function setTimewaste(coins){
+        coins = localStorage.getItem("coins");
+        if (coins>=12){
+            coins = parseInt(coins) - 12;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerHTML = coins;
+            document.getElementById("timewaste").style.display = "none";
+            localStorage.setItem("timewaste", "on");
+            document.getElementById("timewaste-e").style.display = "block";
+        }
+    }
+    function setDiving(coins){
+        coins = localStorage.getItem("coins");
+        if (coins>=8){
+            coins = parseInt(coins) - 5;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerHTML = coins;
+            document.getElementById("diving").style.display = "none";
+            localStorage.setItem("diving", "on");
+            document.getElementById("diving-e").style.display = "block";
+        }
+    }
+    function setReferee(coins){
+        coins = localStorage.getItem("coins");
+        if (coins>=18){
+            coins = parseInt(coins) - 18;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerHTML = coins;
+            document.getElementById("bribing").style.display = "none";
+            localStorage.setItem("bribing", "on");
+            document.getElementById("bribing-e").style.display = "block";
+        }
+    }
+    function setExtremeaggression(coins){
+        coins = localStorage.getItem("coins");
+        if (coins>=3){
+            coins = parseInt(coins) - 3;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerHTML = coins;
+            document.getElementById("extreme").style.display = "none";
+            localStorage.setItem("extreme", "on");
+            document.getElementById("extreme-e").style.display = "block";
+        }
+    }
+    function setStar(coins){
+        coins = localStorage.getItem("coins");
+        if (coins>=25){
+            coins = parseInt(coins) - 25;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerHTML = coins;
+            document.getElementById("star").style.display = "none";
+            localStorage.setItem("star", "on");
+            document.getElementById("star-e").style.display = "block";
+        }
+    }
+
+    function sellTimewaste(coins){
+        coins = localStorage.getItem("coins");
+        coins = parseInt(coins) + 11;
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").innerHTML = coins;
+        document.getElementById("timewaste").style.display = "block";
+        localStorage.setItem("timewaste", "off");
+        document.getElementById("timewaste-e").style.display = "none";
+    }
+    function sellDiving(coins){
+        coins = localStorage.getItem("coins");
+        coins = parseInt(coins) + 4;
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").innerHTML = coins;
+        document.getElementById("diving").style.display = "block";
+        localStorage.setItem("diving", "off");
+        document.getElementById("diving-e").style.display = "none";
+    }
+    function sellExtreme(coins){
+        coins = localStorage.getItem("coins");
+        coins = parseInt(coins) + 2;
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").innerHTML = coins;
+        document.getElementById("extreme").style.display = "block";
+        localStorage.setItem("extreme", "off");
+        document.getElementById("extreme-e").style.display = "none";
+    }
+    function sellBribing(coins){
+        coins = localStorage.getItem("coins");
+        coins = parseInt(coins) + 17;
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").innerHTML = coins;
+        document.getElementById("bribing").style.display = "block";
+        localStorage.setItem("bribing", "off");
+        document.getElementById("bribing-e").style.display = "none";
+    }
+    function sellStar(coins){
+        coins = localStorage.getItem("coins");
+        coins = parseInt(coins) + 24;
+        localStorage.setItem("coins", coins);
+        document.getElementById("coins").innerHTML = coins;
+        document.getElementById("star").style.display = "block";
+        localStorage.setItem("star", "off");
+        document.getElementById("star-e").style.display = "none";
+    }
+</script>
+<script>
+    function reload(){
+        document.getElementById('active').innerHTML ='Active Team: '+ localStorage.getItem('team');
+        document.getElementById('mentality').innerHTML ='Active Mentality: '+ localStorage.getItem('mentality');
+        document.getElementById('play').innerHTML ='Active Play Style: '+ localStorage.getItem('play');
+        document.getElementById('passing').innerHTML ='Active Passing Style: '+ localStorage.getItem('passing');
+        document.getElementById('aggression').innerHTML ='Active Aggression: '+ localStorage.getItem('aggression');
+        document.getElementById('pressing').innerHTML ='Active Pressing Style: '+ localStorage.getItem('pressing');
+        var timewaste = localStorage.getItem("timewaste");
+        if (timewaste=="on"){
+            document.getElementById("timewaste").style.display = "none";
+            document.getElementById("timewaste-e").style.display = "block";
+        }
+        var diving = localStorage.getItem("diving");
+        if (diving=="on"){
+            document.getElementById("diving").style.display = "none";
+            document.getElementById("diving-e").style.display = "block";
+        }
+        var bribing = localStorage.getItem("bribing");
+        if (bribing=="on"){
+            document.getElementById("bribing").style.display = "none";
+            document.getElementById("bribing-e").style.display = "block";
+        }
+        var extreme = localStorage.getItem("extreme");
+        if (extreme=="on"){
+            document.getElementById("extreme").style.display = "none";
+            document.getElementById("extreme-e").style.display = "block";
+        }
+        var star = localStorage.getItem("star");
+        if (star=="on"){
+            document.getElementById("star").style.display = "none";
+            document.getElementById("star-e").style.display = "block";
+        }
+        var tab = window.sessionStorage.getItem("tab");
+        if (tab=="a"){setTeam();}
+        else if (tab=="b"){setTactic();}
+        else if (tab=="c"){setExtras();}
+        else{setTeam();}
+    }
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MatchEngine</title>
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <link rel="icon" href="icon.png" type="image/x-icon"/>    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <icon src="icon.png"/>
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    body{
+        font-family: 'Sulphur Point';
+        text-align: center;
+        overflow: auto;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        transition: 0.3s;
+    }
+    #main{
+        opacity: 0;
+        animation: main 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: 2.6s;
+    }
+    .large{
+        background-color: white;
+        border: 2px solid black;
+        width:200px;
+        height: 100px;
+        margin: auto;
+        border-radius: 10px;
+        transition: 0.3s;
+        line-height: 100px;
+        font-size: 25px;
+        display: inline-block;
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
+    }
+    .large:hover{
+        cursor: pointer;
+        background-color: rgb(0, 255, 179);
+    }
+    .small{
+        background-color: white;
+        border: 2px solid black;
+        width:200px;
+        height: 30px;
+        margin: auto;
+        border-radius: 10px;
+        transition: 0.3s;
+        line-height: 30px;
+        font-size: 15px;
+        display: inline-block;
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
+    }
+    .small:hover{
+        cursor: pointer;
+        background-color: rgb(0, 255, 179);
+    }
+    #dark{
+        height: 30px;
+        line-height: 30px;
+        font-size: 15px;
+    }
+    #light{display: none;}
+    #advert{
+        background-color: #fff;
+        border: 2px solid black;
+        padding: 5px;
+        border-radius: 20px;
+        height: auto;
+        width: 40%;
+        margin: auto;
+        z-index: 999;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    }
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    #spalsh {
+        height: 100%;
+        width: 100%;
+        background: #49ffcc;
+        padding-top: 10%;
+        position: fixed;
+        z-index: 999;
+        animation: splashscreen 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    #spashicon{
+        animation: splashicon 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    @keyframes splashscreen {
+        from {transform: translate(0px, 0px);}
+        75%{transform: translate(0px, 0px);}
+        to {transform: translate(-100%, 0px);}
+    }
+    @keyframes splashicon {
+        from {transform: translate(0px, 0px);}
+        75%{transform: translate(0px, 0px);}
+        to {transform: translate(-100%, 0px);}
+    }
+    @keyframes main {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    @media screen and (max-width: 800px){
+        #spalsh{
+            padding-top: 22%;
+        }
+    }
+    </style>
+</head>
+<body oncontextmenu="return false" id="body">
+    <section id="spalsh">
+        <img src="icon.png" height="250px" id="spashicon">
+    </section>
+    <section id="main">
+        <img src="icon.png" height="100px">
+        <h1 style="font-size: 40px;">MatchEngine</h1>
+        <section class="large" onclick="window.location.assign('football.html')" id="football">Football</section>
+        <section class="large" id="games" onclick="window.location.assign('games.html');">Games</section>
+        <br>
+        <section class="small" id="developers" onclick="window.location.assign('developers.html')">Developers</section>
+        <br>
+    </section>
+</body>
+<script>
+    //DISABLE CODE INSPECT
+    document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+    }
+    }
+</script>
+</body> 
+
+<!-- Hotjar Tracking Code for https://matchengine.netlify.com/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1625772,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>
+
+</html>

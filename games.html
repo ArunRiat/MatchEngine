@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MatchEngine</title>
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <link rel="icon" href="icon.png" type="image/x-icon"/>    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <icon src="icon.png"/>
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <style>
+    body{
+        font-family: 'Sulphur Point';
+        text-align: center;
+        overflow: auto;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        transition: 0.3s;
+    }
+    .large{
+        background-color: white;
+        border: 2px solid black;
+        width:200px;
+        height: 100px;
+        margin: auto;
+        border-radius: 10px;
+        transition: 0.3s;
+        line-height: 100px;
+        font-size: 25px;
+        display: inline-block;
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
+    }
+    .large:hover{
+        cursor: pointer;
+        background-color: rgb(0, 255, 179);
+    }
+    .small{
+        background-color: white;
+        border: 2px solid black;
+        width:200px;
+        height: 30px;
+        margin: auto;
+        border-radius: 10px;
+        transition: 0.3s;
+        line-height: 30px;
+        font-size: 15px;
+        display: inline-block;
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
+    }
+    .small:hover{
+        cursor: pointer;
+        background-color: rgb(0, 255, 179);
+    }
+    #dark{
+        height: 30px;
+        line-height: 30px;
+        font-size: 15px;
+    }
+    #light{display: none;}
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    </style>
+</head>
+<body oncontextmenu="return false" id="body">
+    <img src="icon.png" height="100px">
+    <h1>MatchEngine</h1>
+    <section class="large" onclick="window.location.assign('pre.html');">Manager Game</section>
+    <section class="large" id="games" onclick="window.location.assign('penalty.html');">Penalty Game</section>
+</body>
+<script>
+    //DISABLE CODE INSPECT
+    document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+    }
+    }
+
+
+    document.onkeydown = function() 
+    {
+        switch (event.keyCode) 
+        {
+            case 116 : //F5 button
+                event.returnValue = false;
+                event.keyCode = 0;
+                return false;
+            case 82 : //R button
+                if (event.ctrlKey) 
+                {
+                    event.returnValue = false;
+                    event.keyCode = 0;
+                    return false;
+                }
+        }
+    }
+</script>
+
+
+<!-- Hotjar Tracking Code for https://matchengine.netlify.com/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1625772,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MatchEngine</title>
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <link rel="icon" href="icon.png" type="image/x-icon"/>    
+    <icon src="icon.png"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <style>
+    body{
+        font-family: 'Sulphur Point';
+        text-align: center;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    }
+    .main{
+        display: block;
+        height: auto;
+        padding: 5px;
+        width: 60%;
+        border: 3px solid black;
+        border-radius: 10px;
+        margin: auto;
+        margin-top: 10px;
+    }
+    input{
+        height: 20px;
+        margin-top: 5px;
+    }
+    button{
+        width: 200px;
+        height: 30px;
+        border: 3px solid rgb(0, 255, 179);
+        background-color: rgb(0, 255, 179);
+        border-radius: 10px;
+        transition: 0.2s;
+    }
+    button:hover{
+        background-color: #fff;
+        cursor: pointer;
+    }
+    .teams{
+        display: inline-block;
+        border: 2px solid black;
+        width: 130px;
+        vertical-align:middle;
+        margin: 2px;
+        transition: 0.3s;
+    }
+    .teams:hover{
+        background-color: rgb(0, 255, 179);
+        cursor: pointer;
+    }
+    .tactic{
+        display: inline-block;
+        border: 2px solid black;
+        width: 150px;
+        vertical-align:middle;
+        margin: 2px;
+        transition: 0.3s;
+    }
+    .tactic:hover{
+        background-color: rgb(0, 255, 179);
+        cursor: pointer;
+    }
+    .float{display: none;}
+    .tabheader{
+        width: 30%;
+        display: inline-block;
+        border: 1px solid black;
+        transition: 0.3s;
+        cursor: pointer;
+        margin: -1px;
+        height: 30px;
+        line-height: 30px;
+    }
+    #team{
+        background-color: rgb(0, 255, 179);
+    }
+    #teams{display: block;}
+    #tactics{display: none;}
+    #extras{display: none;}
+    .extra{
+        display: block;
+        border: 2px solid black;
+        width: 90%;
+        margin: auto;
+        margin-top: 2px;
+        transition: 0.3s;
+        height: 23px;
+    }
+    .extra:hover{
+        background-color: rgb(0, 255, 179);
+        cursor: pointer;
+    }
+    .left{
+        float: left;
+        height: 20px;
+        margin: 2px;
+        margin-left: 5px;
+    }
+    .right{
+        float: right;
+        height: 20px;
+        margin: 2px;
+        margin-right:5px;
+    }
+    .tabcontent{
+        width: 90%;
+        margin: auto;
+        margin-top: 0px;
+        height: auto;
+        border: 1px solid black;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    #timewaste-e{display: none;}
+    #bribing-e{display: none;}
+    #diving-e{display: none;}
+    #extreme-e{display: none;}
+    @media screen and (max-width: 800px){
+        .float{display: block;}
+    }
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    </style>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body oncontextmenu="return false" onload="reload()">
+    <img src="icon.png" height="100px">
+    <h1>MatchEngine Manager</h1>
+    <section class="main">
+        <h3>Have a game? Continue it...</h3>
+        <button onclick="window.location.assign('manager.html');">Continue Game</button>
+    </section>
+    <section class="main">
+        <h3>Restart or Create a new game...</h3>
+        <button onclick="restart()">Restart\Start Game</button>
+    </section>
+</body>
+</html>
+<script>
+    //DISABLE CODE INSPECT
+    document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+    }
+    }
+
+    function restart(){
+        localStorage.clear();
+        window.sessionStorage.setItem("tab", "a");
+        window.location.assign('manager.html');
+    }
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>

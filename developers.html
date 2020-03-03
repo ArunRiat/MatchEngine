@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MatchEngine</title>
+    <link rel="icon" href="icon.png" type="image/x-icon"/>    
+    <icon src="icon.png"/>
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <style>
+    body{
+        font-family: 'Sulphur Point';
+        text-align: center;
+        overflow: auto;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        overflow:hidden;
+    }
+    section{
+        width: 300px;
+        height: auto;
+        border: 2px solid black;
+        border-radius: 10px;
+        margin: auto;
+    }
+    input{
+        width: 80%;
+        border: 1px solid black;
+        height: 25px;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 10px;
+    }
+    button{
+        background-color: #1fffca;
+        border: none;
+        width: 80%;
+        height: 30px;
+        border-radius: 10px;
+        transition: 0.2s;
+    }
+    button:hover{
+        background-color: #07bc89;
+        cursor: pointer;
+    }
+    #error{
+        color: red;
+        display: none;
+    }
+    #dashboard{
+        display: none;
+    }
+    #device{
+        margin-top: 2px;
+    }
+    #top{
+        margin-bottom: 0px;
+    }
+    table{
+        border: 1px solid black;
+        margin: auto;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    td{
+        width: 100px;
+        padding: 5px;
+        border: 2px solid black;
+        transition: 0.3s;
+        height: 50px;
+    }
+    td:hover{
+        background-color: #1fffc7;
+        cursor: pointer;
+    }
+    a{
+        height: 100%;
+        width: 100%;
+    }
+    .files{
+        width: 40%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    #all{
+        background-color: rgb(52, 224, 52);
+        width:100px;
+        border-radius: 5px;
+    }
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    }
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  margin-top: 5%;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+    .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    }
+    a{
+        color:black;
+    }
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    </style>
+</head>
+<body oncontextmenu="return false" onload="check(); resize();" id="body">
+    <main id="login">
+        <img src="icon.png" height="100px">
+        <h1>MatchEngine Developers</h1>
+        <section id="main">
+            <h2>Login</h2>
+            Developer Code:
+            <br>
+            <input type="password" id="devcode">
+            <br>
+            <br>
+            <button onclick="verify()" id="go">Login</button>
+            <br>
+            <br>
+            <p id="error"></p>
+        </section>
+    </main>
+    <main id="dashboard">
+        <img src="icon.png" height="100px">
+        <h1 id="top">MatchEngine Developers</h1>
+        <p id="device">Desktop</p>
+        <main id="desktop">
+                <table>
+                    <tr>
+    
+                        <td id="myBtn">Download Files</td>
+                        <td onclick="alert('No BETA Mode active at this time')">MatchEngine Beta</td>
+                        <td onclick="window.location.assign('Forms/bug.html')">Report Bug</td>
+                    </tr>
+                    <tr>
+                        <td onclick="window.location.assign('Forms/update.html')">Suggest Update</td>
+                        <td onclick="window.location.href = 'https://matchengine-old.netlify.com/';">Old Version</td>
+                        <td onclick="Logout()">Log Out</td>
+                    </tr>
+                </table>
+        </main>
+    
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+    
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <section class="files">
+                <h2>Download HTML Files</h2>
+                <a href="index.html" download id="home">Home Page</a>
+                <br>
+                <a href="football.html" download id="football">Football</a>
+                <br>
+                <a href="penalty.html" download id="penalty">Penalty Game</a>
+                <br>
+                <a href="pre.html" download id="pre">Pre Manager</a>
+                <br>
+                <a href="manager.html" download id="manager">Manager Screen</a>
+                <br>
+                <a href="match.html" download id="match">Manager Match</a>
+                <br>
+                <a href="404.html" download id="404">404 Error Page</a>
+                <br>
+                <a href="games.html" download id="games">Game Hub</a>
+                <br>
+                <a href="developers.html" download id="developers">Developers</a>
+            </section>
+            <section class="files">
+                <h2>Download JavaScript Files</h2>
+                <a href="JavaScript/developers.js" download id="jsdev">Developers</a>
+                <h2>Download HTML Form Files</h2>
+                <a href="Forms/update.html" download id="update">Suggest Update</a>
+                <br>
+                <a href="Forms/bug.html" download id="bug">Report Bug</a>
+                <br>
+                <h2>Download All Files</h2>
+                <button id="all" onclick="allFiles();">Download All</button>
+            </section>
+
+        </div>
+        </div>
+    </main>
+</body>
+</html>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    }
+    //DISABLE CODE INSPECT
+    document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+    }
+    }
+
+    //Run on enter key
+    var store = document.getElementById("devcode");
+    store.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("go").click();
+    }
+    });
+
+    function check(){
+        var prev = window.sessionStorage.getItem("developer");
+        if (prev=="true"){
+            document.getElementById("dashboard").style.display = "block";
+            document.getElementById("login").style.display = "none";
+        }
+    }
+
+    function allFiles(){
+        document.getElementById("home").click();
+        document.getElementById("football").click();
+        document.getElementById("penalty").click();
+        document.getElementById("pre").click();
+        document.getElementById("manager").click();
+        document.getElementById("match").click();
+        document.getElementById("404").click();
+        document.getElementById("games").click();
+        document.getElementById("developers").click();
+        document.getElementById("jsdev").click();
+        document.getElementById("update").click();
+        document.getElementById("bug").click();
+
+    }
+</script>
+<script src="JavaScript/developers.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>

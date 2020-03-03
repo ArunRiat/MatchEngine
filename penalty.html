@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Match Engine</title>
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <link rel="icon" href="icon.png" type="image/x-icon"/>
+    <icon src="icon.png"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <style>
+        body{
+            font-family: 'Sulphur Point';
+            text-align: center;
+            overflow: auto;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            color: black;
+        }
+        section{
+            display: inline-block;
+        }
+        button{
+            display: inline-block;
+            background-color: white;
+            width: 75px;
+            height: 75px;
+            text-align: center;
+            border-radius: 100%;
+            margin: 5px;
+            border: 1px black solid;
+        }
+        button:hover{
+            background-color: #43c59e;
+            cursor: pointer;
+            border: 1px black solid;
+            
+        }
+        #Result1:hover{
+            background-color: red;
+            cursor:auto;
+            border: 1px black solid;
+        }
+        #Result1{
+            background-color: red;
+            visibility: hidden;
+        }
+        #Result2:hover{
+            background-color: green;;
+            cursor:auto;
+            border: 1px black solid;
+        }
+        #Result2{
+            background-color: green;
+            visibility: hidden;
+        }
+        p{
+            margin: 1px;
+        }
+        header{
+            background-color:transparent;
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: solid 10px black;
+            border-left: solid 10px black;
+            border-right: solid 10px black;
+        }
+        @media screen and (max-width: 1171px){
+            button{
+                width: 40px;
+                height: 40px;
+            }
+            header{
+                width: 300px;
+            }
+        }
+            /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    </style>
+</head>
+<body>
+    <a href="index.html" id="icon"><img src="icon.png" height="100px" ></a>
+    <header>
+        <section>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+        </section>
+        <br>
+        <section>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+        </section>
+        <br>
+        <section>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+            <button onclick="play()"></button>
+        </section>
+    </header>
+    <h1 style="color: black;">Result:</h1>
+    <button id="Result1" style="color: white; height: 50px; width: 50px;">Save!</button>
+    <button id="Result2" style="color: white; height: 50px; width: 50px;">Goal!</button>
+    <p id="score" style="color: black;"></p>
+    <p id="hscore" style="color: black;"></p>
+</body>
+<script>
+    document.getElementById("hscore").innerHTML =
+    "High Score: 0";
+    document.getElementById("score").innerHTML =
+    "Score: 0";
+    var score = 0;
+    var highscore = 0;
+    var prevscore = 0;
+    function play(){
+        var chance = Math.floor(Math.random()*6)
+        var goal = Math.floor(Math.random()*chance)
+        if (goal==1){
+            document.getElementById("Result1").style.visibility =
+            "visible";
+            document.getElementById("Result2").style.visibility =
+            "hidden";
+            prevscore = score;
+            if (prevscore>highscore){
+                highscore = prevscore;
+            }
+            score = 0;
+            document.getElementById("score").innerHTML =
+            "Score: " + score;
+            document.getElementById("hscore").innerHTML =
+            "High Score: " + highscore;
+        }
+        else{
+            document.getElementById("Result2").style.visibility =
+            "visible";
+            document.getElementById("Result1").style.visibility =
+            "hidden";
+            score = score+1;
+            document.getElementById("score").innerHTML =
+            "Score: " + score;
+        }
+    }
+</script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>
+
+</html>

@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MatchEngine</title>
+    <link rel="icon" href="icon.png" type="image/x-icon"/>    
+    <meta name="description" content="Welcome to MatchEngine: here you can generate authentic match results, stats and many more detailed options. MatchEngine is a football website allowing you to create random matches">
+    <meta name="google-site-verification" content="Q9zjIA3lUyBaj_KMF0Y1-4ffx5IFoAA1dWiAOUXEz1s" />
+    <icon src="icon.png"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sulphur+Point">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body{
+        font-family: 'Sulphur Point';
+        text-align: center;
+        overflow: auto;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        transition: 0.3s;
+    }
+    h1{
+        margin: none;
+    }
+    #top:hover{
+        cursor: pointer;
+    }
+    .container{
+        width: 95%;
+        height: auto;
+        padding: 5px;
+        border: 3px solid black;
+        margin: auto;
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
+        line-height: auto;
+    }
+    .content{
+        width: 30%;
+        height: auto;
+        display: inline-block;
+        margin: auto;
+    }
+    .content-float{
+        width: 30%;
+        height: auto;
+        display: inline-block;
+        margin: auto;
+    }
+    .content-exp{
+        width: 30%;
+        height: auto;
+        display: inline-block;
+        margin: auto;
+    }
+    #_table_{
+        width: 50%;
+    }
+    table{
+        border: 3px solid black;
+        margin: auto;
+        width: 600px;
+        border-collapse: collapse;
+    }
+    th{
+        border: 1px solid black;
+        border-collapse: collapse;
+        border-bottom: 2px solid black;
+        width: 200px;
+        padding: 2px;
+    }
+    td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 200px;
+        padding: 2px;
+    }
+    #_detail_{
+        color: dodgerblue;
+        width: auto;
+    }
+    #_detail_:hover{
+        color: dodgerblue;
+        text-decoration: underline dodgerblue;
+        cursor: pointer;
+    }
+    #_score_penalties_{
+        width: 95%;
+    }
+    #_penalties_{
+        display: none;
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin:5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .scorers{
+        border: 1px solid black;
+        width: 30%;
+        margin: auto;
+    }
+    .block{
+        width: 30%;
+    }
+    .circle{
+        background-color: white;
+        height: 40px;
+        width: 40px;
+        font-size: 13px;
+        border: 3px solid black;
+        border-radius: 100%;
+        line-height: 40px;
+        z-index: 999;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        position: fixed;
+        margin: 10px;
+        display: block;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .circle:hover{
+        cursor: pointer;
+        background-color: teal;
+        color: white;
+    }
+    .circle:active{
+        background-color: lightgray;
+    }
+    #menu{
+        z-index: 99;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        position: fixed;
+        height: 100%;
+        width: 0;
+        background-color: #f2f2f2; 
+        transition: 0.7s;
+    }
+    #close-button{
+        display: none;
+    }
+    .menu-content{
+        font-size: 24px;
+        height: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        width:30%;
+        transition: color 0.2s;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
+    .menu-content:hover{
+        color: #aaa;
+        cursor: pointer;
+    }
+    .menu-container{
+        margin-top: 15%;
+    }
+    #dark, #download, #exit{
+        display: none;
+    }
+    .navmenu{
+        width: 100%;
+        margin: auto;
+        position: fixed;
+        height: 30px;
+        z-index: 99999999999;
+        background-color: #f2f2f2;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        line-height: 30px;
+        padding: 5px;
+        font-size: 20px;
+        transition: background-color 0.5s;
+    }
+    .navmenu:hover{
+        background-color: #cccccc;
+        cursor: pointer;
+    }
+    #open{display: block;}
+    #close{display: none;}
+    #menuopt{
+        display: block;
+        width: 100%;
+        height: 0px;
+        background-color: #f2f2f2;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: fixed;
+        transition: 0.2s;
+    }
+    .option{
+        width: 60%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .option:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .leftbar{
+        height: 20px;
+        display: inline-block;
+        margin: 0px;
+        color: black;
+        background-color: #49ffcc;
+        width: 20px;
+        transition: 1s;
+        transform: skew(15deg);
+        
+    }
+    .rightbar{
+        height: 20px;
+        display: inline-block;
+        margin: 0px;
+        color: white;
+        background-color:#05bd89;
+        width: 20px;
+        transition: 1s;
+        transform: skew(15deg);
+    }
+    .bg{
+        height: 100px;
+        width: 20px;
+        background-color: #05bd89;
+        margin: auto;
+        border: 0.5px solid white;
+        display: inline-block;
+    }
+    .text{
+        display: inline-block;
+        width: 104px;
+        margin: auto;
+    }
+    .card{width:4%; border-left: none;}
+    .name{width: 100px; border-right: none;}
+    #player_tab{width: 100%;}
+    .form{
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        margin: 2px;
+        vertical-align: middle;
+        border-radius: 5px;
+        background-color: rgb(131, 131, 131);
+    }
+    .form-w{
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        margin: 2px;
+        vertical-align: middle;
+        border-radius: 5px;
+        background-color: rgb(54, 233, 0);
+    }
+    .form-l{
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        margin: 2px;
+        vertical-align: middle;
+        border-radius: 5px;
+        background-color: rgb(233, 0, 0);
+    }
+    .form-d{
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        margin: 2px;
+        vertical-align: middle;
+        border-radius: 5px;
+        background-color: rgb(238, 255, 0);
+    }
+    #_form_{
+        padding: 5px;
+    }
+    #form5{
+        border: 1px solid black;
+    }
+    #menu-icon{
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 28px;
+        transition: 0.2s;
+    }
+    #menu-icon:hover{
+        cursor: pointer;
+        color: lightgrey;
+    }
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #05bd89;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #ffffff;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+        color: #c5c5c5;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+    @media screen and (max-width: 800px){
+        #awaylineup{
+            display: block;
+            width: auto;
+        }
+        #homelineup{
+            display: block;
+            width: auto;
+        }
+        .players{
+            width:auto;
+        }
+        #_table_{
+            width: 90%;
+        }
+        table{
+            width: 90%;
+        }
+        td{
+            width: 30%;
+        }
+        th{
+            width: 30%;
+        }
+        .content-float{
+            display:none;
+        }
+        .content-exp{
+            width: 45%;
+        }
+        #coinsdisplay{
+            display: block;
+        }
+        #form{
+            width: 90%;
+        }
+    }
+        /* width */
+        ::-webkit-scrollbar {
+        width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(172, 172, 172); 
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: lightgrey; 
+    }
+    </style>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body id="body" oncontextmenu="return false" onload="load();">
+    <i class="fa fa-bars" id="menu-icon" onclick="openNav()"></i>
+    <img src="icon.png" height="80px" id="top" onclick="window.location.assign('index.html')">
+    <section class="container" id="_form_">
+        <div class="content" id="form">
+            <div id="form1" class="form"></div>
+            <div id="form2" class="form"></div>
+            <div id="form3" class="form"></div>
+            <div id="form4" class="form"></div>
+            <div id="form5" class="form"></div>
+        </div>
+        <div class="content" id="coinsdisplay">
+            <div>Coins: <em id="coins" style="font-style: normal;"></em><i class='fas fa-circle' style='color:gold'></i></div>
+        </div>
+    </section>
+    <section class="container" id="_teams_">
+        <div class="content" id="_home_"></div>
+        <div class="content" id="_score_"></div>
+        <div class="content" id="_away_"></div>
+    </section>
+    <section class="container" id="_scorers_">
+        <div class="content-exp" id="h_scorer1"></div>
+        <div class="content-float"></div>
+        <div class="content-exp" id="a_scorer1"></div>
+        <br>
+        <div class="content-exp" id="h_scorer2"></div>
+        <div class="content-float"></div>
+        <div class="content-exp" id="a_scorer2"></div>
+        <br>
+        <div class="content-exp" id="h_scorer3"></div>
+        <div class="content-float"></div>
+        <div class="content-exp" id="a_scorer3"></div>
+        <br>
+        <div class="content-exp" id="h_scorer4"></div>
+        <div class="content-float"></div>
+        <div class="content-exp" id="a_scorer4"></div>
+        <br>
+        <div class="content-exp" id="h_scorer5"></div>
+        <div class="content-float"></div>
+        <div class="content-exp" id="a_scorer5"></div>
+    </section>
+    <section class="container" id="_officials_">
+        <div class="content">Referee:</div>
+        <div class="content" id="_referee_"></div>
+        <br>
+        <div class="content">VAR Referee:</div>
+        <div class="content" id="_var_referee_"></div>
+    </section>
+    <section class="container">
+        <div style="font-size: 20px;"><strong>Stats</strong></div>
+        <div class="tags">Posession</div>
+        <div class="leftbar" id="leftpos"></div><div class="rightbar" id="rightpos"></div>
+        <div class="tags">Shots</div>
+        <div class="leftbar" id="lefts"></div><div class="rightbar" id="rights"></div>
+        <div class="tags">Shots On Target</div>
+        <div class="leftbar" id="leftsot"></div><div class="rightbar" id="rightsot"></div>
+        <div class="tags">Yellow Cards</div>
+        <div class="leftbar" id="lefty"></div><div class="rightbar" id="righty"></div>
+        <div class="tags">Red Cards</div>
+        <div class="leftbar" id="leftr"></div><div class="rightbar" id="rightr"></div><br>
+        <div class="content" id="_detail_" class="blue_links">View Detailed Stats</div>
+    </section>
+    <section class="container" id="stats" style="display: none;">
+        <div class="content" id="_table_">
+            <table>
+                <tr>
+                    <th id="_stat_home_"></th>
+                    <th></th>
+                    <th id="_stat_away_"></th>
+                </tr>
+                <tr>
+                    <td id="_home_posession_"></td>
+                    <td>Posession</td>
+                    <td id="_away_posession_"></td>
+                </tr>
+                <tr>
+                    <td id="_home_shots_"></td>
+                    <td>Shots</td>
+                    <td id="_away_shots_"></td>
+                </tr>
+                <tr>
+                    <td id="_home_target_"></td>
+                    <td>Shots On Target</td>
+                    <td id="_away_target_"></td>
+                </tr>
+                <tr>
+                    <td id="_home_yellow_"></td>
+                    <td>Yellow Cards</td>
+                    <td id="_away_yellow_"></td>
+                </tr>
+                <tr>
+                    <td id="_home_red_"></td>
+                    <td>Red Cards</td>
+                    <td id="_away_red_"></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+    </section>
+    <section class="container">
+        <div class="content" id="homelineup">
+            <div><strong>Home Lineup</strong></div>
+
+            <table id="player_tab">
+                <tr>
+                    <td id="hp1" class="name"></td>
+                    <td id="hc1" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp2" class="name"></td>
+                    <td id="hc2" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp3" class="name"></td>
+                    <td id="hc3" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp4" class="name"></td>
+                    <td id="hc4" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp5" class="name"></td>
+                    <td id="hc5" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp6" class="name"></td>
+                    <td id="hc6" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp7" class="name"></td>
+                    <td id="hc7" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp8" class="name"></td>
+                    <td id="hc8" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp9" class="name"></td>
+                    <td id="hc9" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp10" class="name"></td>
+                    <td id="hc10" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="hp11" class="name"></td>
+                    <td id="hc11" class="card"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="content" id="awaylineup">
+            <div><strong>Away Lineup</strong></div>
+            <table id="player_tab">
+                <tr>
+                    <td id="ap1" class="name"></td>
+                    <td id="ac1" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap2" class="name"></td>
+                    <td id="ac2" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap3" class="name"></td>
+                    <td id="ac3" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap4" class="name"></td>
+                    <td id="ac4" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap5" class="name"></td>
+                    <td id="ac5" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap6" class="name"></td>
+                    <td id="ac6" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap7" class="name"></td>
+                    <td id="ac7" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap8" class="name"></td>
+                    <td id="ac8" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap9" class="name"></td>
+                    <td id="ac9" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap10" class="name"></td>
+                    <td id="ac10" class="card"></td>
+                </tr>
+                <tr>
+                    <td id="ap11" class="name"></td>
+                    <td id="ac11" class="card"></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section class="container" id="_motm_">
+        <div class="content">Man of the Match:</div>
+        <div class="content" id="_player_"></div>
+    </section>
+    <section class="container" id="_location_">
+        <div class="content">Stadium:</div>
+        <div class="content" id="_stadium_"></div>
+        <br>
+        <div class="content">Attendance:</div>
+        <div class="content" id="_attendance_"></div>
+    </section>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Detailed Stats</h3>
+            <table>
+                <tr>
+                    <th id="home_pop"></th>
+                    <th>Stat</th>
+                    <th id="away_pop"></th>
+                </tr>
+                <tr>
+                    <td id="home_pop_shots"></td>
+                    <td>Shots</td>
+                    <td id="away_pop_shots"></td>
+                </tr>
+                <tr>
+                    <td id="home_target_pop"></td>
+                    <td>Shots On Target</td>
+                    <td id="away_target_pop"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_corner"></td>
+                    <td>Corners</td>
+                    <td id="away_pop_corner"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_clear"></td>
+                    <td>Clear Cut Chances</td>
+                    <td id="away_pop_clear"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_fouls"></td>
+                    <td>Fouls</td>
+                    <td id="away_pop_fouls"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_yellow"></td>
+                    <td>Yellow Cards</td>
+                    <td id="away_pop_yellow"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_red"></td>
+                    <td>Red Cards</td>
+                    <td id="away_pop_red"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_completed"></td>
+                    <td>Passes Completed</td>
+                    <td id="away_pop_completed"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_failed"></td>
+                    <td>Passes Failed</td>
+                    <td id="away_pop_failed"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_pass"></td>
+                    <td>Pass Accuracy</td>
+                    <td id="away_pop_pass"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_acc"></td>
+                    <td>Shot Accuracy</td>
+                    <td id="away_pop_acc"></td>
+                </tr>
+                <tr>
+                    <td id="home_pop_off"></td>
+                    <td>Offsides</td>
+                    <td id="away_pop_off"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="Forms/bug.html" id="report">Report Bug</a>
+        <a href="Forms/update.html" id="suggest">Suggest Update</a>
+        <a href="developers.html" id="exitbtn">Developers</a>
+        <a href="index.html" id="exitbtn">Exit</a>
+    </div>
+</body>
+</html>
+<script>
+function linearSearch(value, list) {
+    let found = false;
+    let position = -1;
+    let index = 0;
+
+    while(!found && index < list.length) {
+        if(list[index] == value) {
+            found = true;
+            position = index;
+        } else {
+            index += 1;
+        }
+    }
+    return position;
+}
+//Teams
+var hteam = ["Arsenal", "AFC Bournemouth", "Aston Villa", "Brighton and Hove Albion", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Leicester City", "Liverpool", "Manchester City", "Manchester United", "Newcastle United", "Norwich City", "Sheffield United", "Southampton", "Tottenham Hotspur", "Watford", "West Ham United", "Wolves", "Leeds United", "West Bromwich Albion", "Ipswich Town", "Legends FC"]
+var ateam = ["Arsenal", "AFC Bournemouth", "Aston Villa", "Brighton and Hove Albion", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Leicester City", "Liverpool", "Manchester City", "Manchester United", "Newcastle United", "Norwich City", "Sheffield United", "Southampton", "Tottenham Hotspur", "Watford", "West Ham United", "Wolves", "Leeds United", "West Bromwich Albion", "Ipswich Town", "Legends FC"]
+var store_team = localStorage.getItem("team");
+var hrand = linearSearch(store_team, hteam);
+var arand = Math.floor(Math.random()*24);
+while (hrand==arand){
+    var arand = Math.floor(Math.random()*24);
+}
+var home_team = store_team;
+var away_team = ateam[arand];
+document.getElementById("_home_").innerHTML = home_team;
+document.getElementById("_away_").innerHTML = away_team;
+document.getElementById("_stat_home_").innerHTML = home_team;
+document.getElementById("_stat_away_").innerHTML = away_team;
+document.getElementById("home_pop").innerHTML = home_team;
+document.getElementById("away_pop").innerHTML = away_team;
+//Stadium
+var stadium = ["Emirates Stadium", "Vitality Stadium", "Villa Park", "AMEX Stadium", "Turf Moor", "Stamford Bridge", "Selhurst Park", "Goodison Park", "King Power Stadium", "Anfield", "ETIHAD Stadium", "Old Trafford", "St James Park", "Carrow Road", "Bramall Lane", "St Marys Stadium", "White Hart Lane", "Vicorage Road", "London Stadium", "Molineux", "Elland Road", "The Hawthorns", "Portman Road", "Wembely Stadium"]
+var cap = [60260, 11360, 42682, 30750, 22546, 41361, 25456, 39572, 32312, 54074, 55097, 74994, 52405, 27244, 32701, 32505, 62062, 21577, 60000, 31700, 37890, 27000, 30310, 80000]
+var stadiums = stadium[hrand];
+document.getElementById("_stadium_").innerHTML = stadiums;
+var maxcap = cap[hrand];
+var att = Math.floor(Math.random()*maxcap);
+var mincap = maxcap - 5000;
+while (att<mincap){
+    var att = Math.floor(Math.random()*maxcap);
+}
+document.getElementById("_attendance_").innerHTML = att;
+//Referee
+var referee = ["Anthony Taylor", "Michael Oliver", "Martin Atkinson", "Mike Dean", "Kevin Friend", "Andre Marriner", "Jonathan Moss", "Craig Pawson", "Chris Kavanagh", "Paul Tierney", "Stuart Attwell", "Lee Mason", "Lee Probert", "Graham Scott", "David Coote", "Roger East", "Simon Hooper", "Andy Madley"]
+var ref_random = Math.floor(Math.random()*18);
+var _var_random = Math.floor(Math.random()*18);
+while (ref_random==_var_random){
+    var ref_random = Math.floor(Math.random()*18);
+    var _var_random = Math.floor(Math.random()*18);
+}
+document.getElementById("_referee_").innerHTML = referee[ref_random];
+document.getElementById("_var_referee_").innerHTML = referee[_var_random];
+//localStorage
+var store_mentality = localStorage.getItem("mentality");
+var store_play = localStorage.getItem("play");
+var store_passing = localStorage.getItem("passing");
+var store_aggression = localStorage.getItem("aggression");
+var store_press = localStorage.getItem("pressing");
+
+var coins = localStorage.getItem("coins");
+var timewaste = localStorage.getItem("timewaste");
+var diving = localStorage.getItem("diving");
+var bribe = localStorage.getItem("bribing");
+var extreme = localStorage.getItem("extreme");
+//Posession
+if(store_play=="Possesion"){
+    var home_pos = Math.floor(Math.random()*70);
+    while (home_pos<50){
+        var home_pos = Math.floor(Math.random()*70);
+    }
+}
+else{
+    var home_pos = Math.floor(Math.random()*55);
+    while (home_pos<30){
+        var home_pos = Math.floor(Math.random()*55);
+    }
+}
+var away_pos = 100-home_pos;
+document.getElementById("leftpos").innerHTML = home_pos + "%";
+document.getElementById("rightpos").innerHTML = away_pos + "%";
+
+document.getElementById("leftpos").style.width = ((home_pos*2)+20) + "px"; //Width = 340px
+document.getElementById("rightpos").style.width = ((away_pos*2)+20) + "px";
+//Shots
+var home_max = 20;
+var away_max = 20;
+var home_min = 8;
+var away_min = 8;
+if (store_mentality=="Attacking"){home_max = home_max+8; home_min = home_min+2}
+else if (store_mentality=="Defensive"){home_max = home_max-8; home_min = home_min-4}
+if (store_mentality=="Attacking"){away_max = away_max+4; away_min = away_min+2}
+else if (store_mentality=="Defensive"){away_max = away_max-6; away_min = away_min-2}
+
+if (store_press=="High Press"){home_max = home_max+4; home_min = home_min+2}
+else if (store_press=="Sit Back"){home_max = home_max-4; home_min = home_min-3}
+if (store_press=="High Press"){away_max = away_max+4; away_min = away_min-2}
+else if (store_press=="Sit Back"){away_max = away_max-2; away_min = away_min+2}
+
+if (store_aggression=="Aggressive"){away_max = away_max-3; away_min = away_min-12}
+else if (store_aggression=="Soft"){away_max = away_max+3; away_min = away_min+2}
+if (localStorage.getItem("extreme")=="on"){away_max = away_max-5; away_min = away_min-3}
+
+if (store_play=="Counter Attack"){home_max = home_max-2; home_min = home_min+1}
+if (store_play=="Counter Attack"){away_max = away_max+2; away_min = away_min-1}
+
+if (localStorage.getItem("diving")=="on"){home_max = home_max+2; home_min = home_min+2}
+
+if (localStorage.getItem("bribing")=="on"){home_max = home_max+6; home_min = home_min+6}
+
+if (localStorage.getItem("star")=="on"){home_max = home_max+4; home_min = home_min+4}
+
+if(home_min>home_max){home_min = home_max-2}
+if(away_min>away_max){away_min = away_max-2}
+if (home_max<0){home_max = 2}
+if (away_max<0){away_max = 2}
+if (home_min<0){home_min = 0}
+if (away_min<0){away_min = 0}
+var home_shots = Math.floor(Math.random()*home_max);
+while (home_shots<home_min){
+    var home_shots = Math.floor(Math.random()*home_max);
+}
+var away_shots = Math.floor(Math.random()*away_max);
+while (away_shots<away_min){
+    var away_shots = Math.floor(Math.random()*away_max);
+}
+document.getElementById("_home_shots_").innerHTML = home_shots;
+document.getElementById("_away_shots_").innerHTML = away_shots;
+document.getElementById("home_pop_shots").innerHTML = home_shots;
+document.getElementById("away_pop_shots").innerHTML = away_shots;
+
+var total_shots = home_shots+away_shots;
+var one_percent = 200/total_shots;
+var home_s_w = home_shots*one_percent;
+var away_s_w = away_shots*one_percent;
+document.getElementById("lefts").innerHTML = home_shots;
+document.getElementById("rights").innerHTML = away_shots;
+
+document.getElementById("lefts").style.width = (home_s_w+20) + "px";
+document.getElementById("rights").style.width = (away_s_w+20) + "px";
+
+if (home_shots==0){
+    if (away_shots==0){
+        document.getElementById("lefts").style.width = 120 + "px";
+        document.getElementById("rights").style.width = 120 + "px";
+    }
+}
+//Shots On Target
+var home_target = Math.floor(Math.random()*home_shots);
+var away_target = Math.floor(Math.random()*away_shots);
+var home_knock = Math.floor(Math.random()*3);
+var away_knock = Math.floor(Math.random()*3);
+while(home_knock>home_target){
+    var home_knock = Math.floor(Math.random()*4);
+}
+while(away_knock>away_target){
+    var away_knock = Math.floor(Math.random()*2);
+}
+if (timewaste=="on"){
+    var h_sot = parseInt(home_target) - parseInt(home_knock);
+    var a_sot = parseInt(away_target) - parseInt(away_knock);
+}
+else{
+    var h_sot = home_target;
+    var a_sot = away_target;
+}
+document.getElementById("_home_target_").innerHTML = h_sot;
+document.getElementById("_away_target_").innerHTML = a_sot;
+document.getElementById("home_target_pop").innerHTML = h_sot;
+document.getElementById("away_target_pop").innerHTML = a_sot;
+var total_target = h_sot+a_sot;
+var one_percent_target = 200/total_target;
+var home_t_w = h_sot*one_percent_target;
+var away_t_w = a_sot*one_percent_target;
+document.getElementById("leftsot").innerHTML = h_sot;
+document.getElementById("rightsot").innerHTML = a_sot;
+
+document.getElementById("leftsot").style.width = (home_t_w+20) + "px";
+document.getElementById("rightsot").style.width = (away_t_w+20) + "px";
+
+if (h_sot==0){
+    if (a_sot==0){
+        document.getElementById("leftsot").style.width = 120 + "px";
+        document.getElementById("rightsot").style.width = 120 + "px";
+    }
+}
+//Yellow Cards
+if(store_aggression=="Aggressive"){
+    if(store_press=="High Press"){
+        var hy = Math.floor(Math.random()*9);
+        while(hy<6){var hy = Math.floor(Math.random()*9);}
+    }
+    else if (store_press=="Balanced Press"){
+        var hy = Math.floor(Math.random()*8);
+        while(hy<5){var hy = Math.floor(Math.random()*8);}
+    }
+    else{
+        var hy = Math.floor(Math.random()*7);
+        while(hy<4){var hy = Math.floor(Math.random()*7);}
+    }
+}
+else if(store_aggression=="Balanced"){
+    if(store_press=="High Press"){
+        var hy = Math.floor(Math.random()*7);
+        while(hy<4){var hy = Math.floor(Math.random()*7);}
+    }
+    else if (store_press=="Balanced Press"){
+        var hy = Math.floor(Math.random()*6);
+        while(hy<3){var hy = Math.floor(Math.random()*6);}
+    }
+    else{
+        var hy = Math.floor(Math.random()*5);
+        while(hy<3){var hy = Math.floor(Math.random()*5);}
+    }
+}
+else if(store_aggression=="Soft"){
+    if(store_press=="High Press"){
+        var hy = Math.floor(Math.random()*3);
+    }
+    else if (store_press=="Balanced Press"){
+        var hy = Math.floor(Math.random()*3);
+    }
+    else{
+        var hy = Math.floor(Math.random()*3);
+    }
+}
+var ay = Math.floor(Math.random()*8);
+document.getElementById("home_pop_yellow").innerHTML = hy;
+document.getElementById("away_pop_yellow").innerHTML = ay;
+document.getElementById("_home_yellow_").innerHTML = hy;
+document.getElementById("_away_yellow_").innerHTML = ay;
+
+var total_yellow = hy+ay;
+var one_percent_y = 200/total_yellow;
+var home_y_w = hy*one_percent_y;
+var away_y_w = ay*one_percent_y;
+document.getElementById("lefty").innerHTML = hy;
+document.getElementById("righty").innerHTML = ay;
+
+document.getElementById("lefty").style.width = (home_y_w+20) + "px";
+document.getElementById("righty").style.width = (away_y_w+20) + "px";
+
+if (hy==0){
+    if (ay==0){
+        document.getElementById("lefty").style.width = 120 + "px";
+        document.getElementById("righty").style.width = 120 + "px";
+    }
+}
+//Red Cards
+var h_red_c = 6;
+if (store_aggression=="Aggressive"){h_red_c = h_red_c-2};
+if(localStorage.getItem("extreme")=="on"){h_red_c = h_red_c-2};
+if (store_aggression=="Soft"){h_red_c = h_red_c+2}
+var h_red = Math.floor(Math.random()*h_red_c);
+if(h_red==1){hr = 1;}
+else{hr=0}
+var a_red = Math.floor(Math.random()*6);
+if(a_red==1){ar = 1;}
+else{ar=0}
+document.getElementById("_home_red_").innerHTML = hr;
+document.getElementById("_away_red_").innerHTML = ar;
+document.getElementById("home_pop_red").innerHTML = hr;
+document.getElementById("away_pop_red").innerHTML = ar;
+
+document.getElementById("leftr").innerHTML = hr;
+document.getElementById("rightr").innerHTML = ar;
+
+if (hr==0){
+    if (ar==0){
+        document.getElementById("leftr").style.width = 120 + "px";
+        document.getElementById("rightr").style.width = 120 + "px";
+    }
+    else if(ar==1){
+        document.getElementById("leftr").style.width = 20 + "px";
+        document.getElementById("rightr").style.width = 220 + "px";
+    }
+}
+if (hr==1){
+    if (ar==1){
+        document.getElementById("leftr").style.width = 120 + "px";
+        document.getElementById("rightr").style.width = 120 + "px";
+    }
+    else if(ar==0){
+        document.getElementById("leftr").style.width = 220 + "px";
+        document.getElementById("rightr").style.width = 20 + "px";
+    }
+}
+//Shot Accuracy
+var home_acc = (home_target/home_shots)*100;
+if (home_acc<10){
+    var acc_home = home_acc.toPrecision(1);
+}
+else{
+    var acc_home = home_acc.toPrecision(2);
+}
+var h_string = acc_home + "%";
+
+var away_acc = (away_target/away_shots)*100;
+if (away_acc<10){
+    var acc_away = away_acc.toPrecision(1);
+}
+else{
+    var acc_away = away_acc.toPrecision(2);
+}
+var a_string = acc_away + "%";
+document.getElementById("home_pop_acc").innerHTML = h_string;
+document.getElementById("away_pop_acc").innerHTML = a_string;
+//Passes Completed
+var home_passes = Math.floor(Math.random()*700);
+while (home_passes<200){
+    var home_passes = Math.floor(Math.random()*700);
+}
+var away_passes = Math.floor(Math.random()*700);
+while (away_passes<200){
+    var away_passes = Math.floor(Math.random()*700);
+}
+document.getElementById("home_pop_completed").innerHTML = home_passes;
+document.getElementById("away_pop_completed").innerHTML = away_passes;
+//Passes Failed
+var home_failed = Math.floor(Math.random()*200);
+var away_failed = Math.floor(Math.random()*200);
+document.getElementById("home_pop_failed").innerHTML = home_failed;
+document.getElementById("away_pop_failed").innerHTML = away_failed;
+//Pass Percentage
+var total_pass_home = home_passes + home_failed;
+var total_pass_away = away_passes + away_failed;
+var home_pt = Math.round((home_passes/total_pass_home)*100);
+var away_pt = Math.round((away_passes/total_pass_away)*100);
+var home_string = home_pt + "%";
+var away_string = away_pt + "%";
+document.getElementById("home_pop_pass").innerHTML = home_string;
+document.getElementById("away_pop_pass").innerHTML = away_string;
+//Offsides
+document.getElementById("home_pop_off").innerHTML = Math.floor(Math.random()*4);
+document.getElementById("away_pop_off").innerHTML = Math.floor(Math.random()*4);
+//Corners
+document.getElementById("home_pop_corner").innerHTML = Math.floor(Math.random()*14);
+document.getElementById("away_pop_corner").innerHTML = Math.floor(Math.random()*14);
+//Fouls
+if (store_aggression=="Aggressive"){document.getElementById("home_pop_fouls").innerHTML = Math.floor(Math.random()*15);}
+else if(store_aggression=="Balanced"){document.getElementById("home_pop_fouls").innerHTML = Math.floor(Math.random()*10);}
+else if(store_aggression=="Soft"){document.getElementById("home_pop_fouls").innerHTML = Math.floor(Math.random()*5);}
+document.getElementById("away_pop_fouls").innerHTML = Math.floor(Math.random()*14);
+//Clear Cut Chances
+var home_chance = Math.floor(Math.random()*14)
+if (home_chance<4){
+    var hccc = home_chance;
+}
+else{
+    var hccc = 0
+}
+document.getElementById("home_pop_clear").innerHTML = hccc;
+
+var away_chance = Math.floor(Math.random()*14)
+if (away_chance<4){
+    var accc = home_chance;
+}
+else{
+    var accc = 0
+}
+document.getElementById("away_pop_clear").innerHTML = accc;
+//Goals
+var hg = Math.floor(Math.random()*home_target)
+var ag = Math.floor(Math.random()*away_target)
+var limit = 5;
+while (limit<hg){var hg = Math.floor(Math.random()*home_target)}
+while (limit<ag){var ag = Math.floor(Math.random()*away_target)}
+document.getElementById("_score_").innerHTML = hg + "-" + ag;
+//Squads
+var arsenal = ["Bernd Leno", "Hector Bellerin", "David Luiz", "Shkodran Mustafi", "Bukayo Saka", "Granit Xhaka", "Dani Ceballos", "Mesut Ozil", "Pierre-Emerick Aubameyang", "Nicolas Pepe", "Alexandre Lacazette"]
+var bournemouth = ["Aaron Ramsdale", "Diego Rico", "Nathan Ake", "Simon Francis", "Adam Smith", "Dan Gosling", "Jeferson Lerma", "Phillip Billing", "Harry Wilson", "Callum Wilson", "Ryan Fraser"]
+var astonvilla = ["Tom Heaton", "Matt Target", "Tyrone Mings", "Ezri Konsa", "Kourtney Hause", "Frédéric Guilbert", "Douglas Luiz", "Danny Drinkwater", "Anwar El Ghazi", "Jack Grealish", "Mbwana Samatta"]
+var brighton = ["Matt Ryan", "Bernardo", "Adam Webster", "Lewis Dunk", "Steven Alzate", "Aaron Mooy", "Davy Porpper", "Solly March", "Pascal Groß", "Leandro Trossard", "Neal Maupay"]
+var burnley = ["Nick Pope", "Phil Bardsley", "James Tarkowski", "Ben Mee", "Charlie Taylor", "Jeff Hendrick", "Ashley Westwood", "Jack Cork", "Dwight McNiell", "Chris Wood", "Jay Rodriguez"]
+var chelsea = ["Kepa", "Reece James", "Andreas Christiensen", "Antonio Rüdiger", "César Azpilicueta", "Ngolo Kante", "Jorginho", "Callum Hudson-Odoi", "Mason Mount", "Pedro", "Tammy Abraham"]
+var crystalpalace = ["Vincente Guaita", "Martin Kelly", "Gary Cahill", "James Tomkins", "Jaïro Riedewald", "Jordan Ayew", "James McArthur", "James McCarthy", "Cheikhou Kouyaté", "Wilfred Zaha", "Cenk Tosun"]
+var everton = ["Jordan Pickford", "Seamus Cloeman", "Yerry Mina", "Michael Keane", "Luca Digne", "Theo Walcott", "Morgan Schneiderlin", "Gylfi Sigurðsson", "Bernard", "Richarlison", "Dominic Calbert-Lewin"]
+var leicester  = ["Kasper Schmeichel", "Ben Chilwell", "Johnny Evans", "Çağlar Söyüncü", "Ricardo Pereria", "James Maddison", "Wilfred Ndidi", "Youri Tielemans", "Ayoze Perez", "Harvey Barnes", "Jamie Vardy"]
+var liverpool = ["Allison", "Trent Alexander-Arnold", "Virgil Van Dijk", "Joe Gomez", "Andrew Robertson", "Alex Oxilade-Chamberlain", "Naby Keita", "Fabinho", "Mo Salah", "Roberto Firmino", "Sadio Mane"]
+var manchestercity = ["Ederson", "Kyle Walker", "Aymeric Laporte", "Nicolas Otamendi", "Benjamin Mendy", "Rodri", "Kevin De Bruyne", "İlkay Gündoğan", "Raheem Sterling", "Riyad Mahrez", "Sergio Aguero"]
+var manchesterunited = ["David de Gea", "Aaron Wan Bissaka", "Harry Maguire", "Victor Lindelöf", "Brandon Williams", "Scott McTominay", "Paul Pogba", "Fred", "Anthony Martial", "Dan James", "Marcus Rashford"]
+var newcastle = ["Martin Dubravka", "Jamaal Lascelles", "DeAndre Yedlin", "Ciaran Clark", "Jetro Willems", "Fabian Schar", "Matthew Longstaff", "Sean Longstaff", "Miguel Almiron", "Allan Saint-Maxim", "Joelinton"]
+var norwich = ["Tim Krul", "Jamal Lewis", "Sam Bayram", "Ben Godfrey", "Max Aarons", "Kenny McLean", "Alex Tettey", "Marco Stiepermann", "Emi Buendia", "Todd Cantwell", "Teemu Pukki"]
+var sheffieldunited = ["Dean Henderson", "Chris Basham", "Jack O'Connel", "John Egan", "Enda Stevens", "George Baldock", "John Fleck", "Oliver Noorwood", "John Lundstram", "Ollie McBurnie", "Lys Mousset"]
+var southampton = ["Alex McCarthy", "Kyle Walker-Peters", "Jack Stephens", "Jannik Vestergaard", "Ryan Bertrand", "James Ward-Prowse", "Pierre-Emile Højbjerg", "Stuart Armstrong", "Sofiane Boufal", "Danny Ings", "Shane Long"]
+var tottenham = ["Hugo Lloris", "Serge Aurier", "Toby Alderweireld", "Davinson Sánchez", "Ben Davies", "Eric Dier", "Harry Winks", "Lucas Moura", "Dele Alli", "Steven Bergwijn", "Son Heung-min"]
+var watford = ["Ben Foster", "Craig Dawson", "Christian Kabasele", "Craig Cathcart", "Jose Holebas", "Daryl Janmaat", "Abdoulaye Doucoure", "Gerrad Deloufeu", "Roberto Pereriya", "Troy Deeney", "Ismalia Sarr"]
+var westham = ["Lukas Fabianski", "Aaron Cresswell", "Issa Diop", "Angelo Ogbonna", "Ryan Fredericks", "Mark Noble", "Felipe Anderson", "Declan Rice", "Manuel Lanzini", "Pablo Fornals", "Seb Haller"]
+var wolves = ["Rui Patricio", "Connor Coady", "Willy Boly", "Romain Saiss", "Matt Doherty", "Jonny Castro Otto", "Ruben Neves", "João Moutinho", "Adama Traore", "Diogo Jota", "Raul Jimenez"]
+var leeds = ["Kiko Casilla", "Luke Ayling", "Ben White", "Liam Cooper", "Stuart Dallas", "Mateuz Klich", "Kalvin Phillips", "Adam Forshaw", "Ezgjan Alioski", "Pablo Hernandez", "Patrick Bamford"]
+var westbrom = ["Sam Johnstone", "Dara O'Shea", "Semi Ajayi", "Kyle Bartley", "Connor Townsend", "Jake Livermore", "Filip Krovinović", "Matheus Pereira", "Hal Robson-Kanu", "Callum Robinson", "Romaine Sawyers"]
+var ipswich = ["Tomas Holy", "Kane Vincent-Young", "Luke Woolfenden", "Luke Chambers", "James Wilson", "Luke Garbutt", "Cole Skuse", "Flynn Downes", "Jon Nolan", "Kayden Jackson", "James Norwood"]
+var legends = ["Edwin van der Sar", "Carles Puyol", "Roberto Carlos", "Bobby Moore", "Cafu", "Zinedine Zidane", "Lothar Matthaus", "Xavi Hernandez", "Robert Pires", "Pele", "Gerd Müller"]
+
+if (hrand==0){var homesquad = arsenal;}
+else if (hrand==1){var homesquad = bournemouth;}
+else if (hrand==2){var homesquad = astonvilla;}
+else if (hrand==3){var homesquad = brighton;}
+else if (hrand==4){var homesquad = burnley;}
+else if (hrand==5){var homesquad = chelsea;}
+else if (hrand==6){var homesquad = crystalpalace;}
+else if (hrand==7){var homesquad = everton;}
+else if (hrand==8){var homesquad = leicester;}
+else if (hrand==9){var homesquad = liverpool;}
+else if (hrand==10){var homesquad = manchestercity;}
+else if (hrand==11){var homesquad = manchesterunited;}
+else if (hrand==12){var homesquad = newcastle;}
+else if (hrand==13){var homesquad = norwich;}
+else if (hrand==14){var homesquad = sheffieldunited;}
+else if (hrand==15){var homesquad = southampton;}
+else if (hrand==16){var homesquad = tottenham;}
+else if (hrand==17){var homesquad = watford;}
+else if (hrand==18){var homesquad = westham;}
+else if (hrand==19){var homesquad = wolves;}
+else if (hrand==20){var homesquad = leeds;}
+else if (hrand==21){var homesquad = westbrom;}
+else if (hrand==22){var homesquad = ipswich;}
+else if (hrand==23){var homesquad = legends;}
+var stars = ["Lionel Messi", "Cristiano Ronaldo", "Neymar", "Robert Lewandoski", "Kyllian Mbappe", "Edin Hazard", "Marco Reus", "Antonie Griezmann", "Joao Felix"]
+var star = window.localStorage.getItem("star");
+if (star=="on"){
+    var star = Math.floor(Math.random() * 9);
+    homesquad[10] = stars[star];
+}
+document.getElementById("hp1").innerHTML = homesquad[0];
+document.getElementById("hp2").innerHTML = homesquad[1];
+document.getElementById("hp3").innerHTML = homesquad[2];
+document.getElementById("hp4").innerHTML = homesquad[3];
+document.getElementById("hp5").innerHTML = homesquad[4];
+document.getElementById("hp6").innerHTML = homesquad[5];
+document.getElementById("hp7").innerHTML = homesquad[6];
+document.getElementById("hp8").innerHTML = homesquad[7];
+document.getElementById("hp9").innerHTML = homesquad[8];
+document.getElementById("hp10").innerHTML = homesquad[9];
+document.getElementById("hp11").innerHTML = homesquad[10];
+
+if (arand==0){var awaysquad = arsenal;}
+else if (arand==1){var awaysquad = bournemouth;}
+else if (arand==2){var awaysquad = astonvilla;}
+else if (arand==3){var awaysquad = brighton;}
+else if (arand==4){var awaysquad = burnley;}
+else if (arand==5){var awaysquad = chelsea;}
+else if (arand==6){var awaysquad = crystalpalace;}
+else if (arand==7){var awaysquad = everton;}
+else if (arand==8){var awaysquad = leicester;}
+else if (arand==9){var awaysquad = liverpool;}
+else if (arand==10){var awaysquad = manchestercity;}
+else if (arand==11){var awaysquad = manchesterunited;}
+else if (arand==12){var awaysquad = newcastle;}
+else if (arand==13){var awaysquad = norwich;}
+else if (arand==14){var awaysquad = sheffieldunited;}
+else if (arand==15){var awaysquad = southampton;}
+else if (arand==16){var awaysquad = tottenham;}
+else if (arand==17){var awaysquad = watford;}
+else if (arand==18){var awaysquad = westham;}
+else if (arand==19){var awaysquad = wolves;}
+else if (arand==20){var awaysquad = leeds;}
+else if (arand==21){var awaysquad = westbrom;}
+else if (arand==22){var awaysquad = ipswich;}
+else if (arand==23){var awaysquad = legends;}
+document.getElementById("ap1").innerHTML = awaysquad[0];
+document.getElementById("ap2").innerHTML = awaysquad[1];
+document.getElementById("ap3").innerHTML = awaysquad[2];
+document.getElementById("ap4").innerHTML = awaysquad[3];
+document.getElementById("ap5").innerHTML = awaysquad[4];
+document.getElementById("ap6").innerHTML = awaysquad[5];
+document.getElementById("ap7").innerHTML = awaysquad[6];
+document.getElementById("ap8").innerHTML = awaysquad[7];
+document.getElementById("ap9").innerHTML = awaysquad[8];
+document.getElementById("ap10").innerHTML = awaysquad[9];
+document.getElementById("ap11").innerHTML = awaysquad[10];
+var homerate = [0,0,0,0,0,0,0,0,0,0,0];
+var awayrate = [0,0,0,0,0,0,0,0,0,0,0];
+//Scorers
+function goallTally(){
+    var add =  Math.floor(Math.random() * 4) + 1;
+    while (add==0){
+        var add =  Math.floor(Math.random() * 4) + 1;
+    }
+    return add;
+}
+var h = [];
+while(h.length < 5){
+    var r = Math.floor(Math.random() * 90) + 1;
+    if(h.indexOf(r) === -1) h.push(r);
+}
+var a = [];
+while(a.length < 5){
+    var r = Math.floor(Math.random() * 90) + 1;
+    if(a.indexOf(r) === -1) a.push(r);
+}
+function arraySort(ary){
+    ary.sort(function(a, b){return a-b});
+    return ary;
+}
+var at = arraySort(a);
+
+var scorer_h = ["", "", "", "", ""];
+var h1 = Math.floor(Math.random() * 10) + 1;
+var h2 = Math.floor(Math.random() * 10) + 1;
+var h3 = Math.floor(Math.random() * 10) + 1;
+var h4 = Math.floor(Math.random() * 10) + 1;
+var h5 = Math.floor(Math.random() * 10) + 1;
+scorer_h[0] = homesquad[h1];
+scorer_h[1] = homesquad[h2];
+scorer_h[2] = homesquad[h3];
+scorer_h[3] = homesquad[h4];
+scorer_h[4] = homesquad[h5];
+
+var scorer_a = ["", "", "", "", ""];
+var a1 = Math.floor(Math.random() * 10) + 1;
+var a2 = Math.floor(Math.random() * 10) + 1;
+var a3 = Math.floor(Math.random() * 10) + 1;
+var a4 = Math.floor(Math.random() * 10) + 1;
+var a5 = Math.floor(Math.random() * 10) + 1;
+scorer_a[0] = awaysquad[a1];
+scorer_a[1] = awaysquad[a2];
+scorer_a[2] = awaysquad[a3];
+scorer_a[3] = awaysquad[a4];
+scorer_a[4] = awaysquad[a5];
+
+if(hg==1){
+    var ht = arraySort(h);
+    document.getElementById("h_scorer1").innerHTML = scorer_h[0] + " (" + ht[Math.floor(Math.random() * 4) + 1] + ")";
+    homerate[h1] = parseInt(homerate[h1]) + goallTally();
+}
+else if(hg==2){
+    var ach = [h[0], h[1]];
+    var ch = arraySort(ach);
+    document.getElementById("h_scorer1").innerHTML = scorer_h[0] + " (" + ch[0] + ")"
+    document.getElementById("h_scorer2").innerHTML = scorer_h[1] + " (" + ch[1] + ")"
+    homerate[h1] = parseInt(homerate[h1]) + goallTally();
+    homerate[h2] = parseInt(homerate[h2]) + goallTally();
+}
+else if(hg==3){
+    var ach = [h[0], h[1], h[2]];
+    var ch = arraySort(ach);
+    document.getElementById("h_scorer1").innerHTML = scorer_h[0] + " (" + ch[0] + ")"
+    document.getElementById("h_scorer2").innerHTML = scorer_h[1] + " (" + ch[1] + ")"
+    document.getElementById("h_scorer3").innerHTML = scorer_h[2] + " (" + ch[2] + ")"
+    homerate[h1] = parseInt(homerate[h1]) + goallTally();
+    homerate[h2] = parseInt(homerate[h2]) + goallTally();
+    homerate[h3] = parseInt(homerate[h3]) + goallTally();
+}
+else if(hg==4){
+    var ach = [h[0], h[1], h[2], h[3]];
+    var ch = arraySort(ach);
+    document.getElementById("h_scorer1").innerHTML = scorer_h[0] + " (" + ch[0] + ")"
+    document.getElementById("h_scorer2").innerHTML = scorer_h[1] + " (" + ch[1] + ")"
+    document.getElementById("h_scorer3").innerHTML = scorer_h[2] + " (" + ch[2] + ")"
+    document.getElementById("h_scorer4").innerHTML = scorer_h[3] + " (" + ch[3] + ")"
+    homerate[h1] = parseInt(homerate[h1]) + goallTally();
+    homerate[h2] = parseInt(homerate[h2]) + goallTally();
+    homerate[h3] = parseInt(homerate[h3]) + goallTally();
+    homerate[h4] = parseInt(homerate[h4]) + goallTally();
+}
+else if(hg==5){
+    var ht = arraySort(h);
+    document.getElementById("h_scorer1").innerHTML = scorer_h[0] + " (" + ht[0] + ")"
+    document.getElementById("h_scorer2").innerHTML = scorer_h[1] + " (" + ht[1] + ")"
+    document.getElementById("h_scorer3").innerHTML = scorer_h[2] + " (" + ht[2] + ")"
+    document.getElementById("h_scorer4").innerHTML = scorer_h[3] + " (" + ht[3] + ")"
+    document.getElementById("h_scorer5").innerHTML = scorer_h[4] + " (" + ht[4] + ")"
+    homerate[h1] = parseInt(homerate[h1]) + goallTally();
+    homerate[h2] = parseInt(homerate[h2]) + goallTally();
+    homerate[h3] = parseInt(homerate[h3]) + goallTally();
+    homerate[h4] = parseInt(homerate[h4]) + goallTally();
+    homerate[h5] = parseInt(homerate[h5]) + goallTally();
+}
+if(ag==1){
+    var at = arraySort(a);
+    document.getElementById("a_scorer1").innerHTML = scorer_a[0] + " (" + at[Math.floor(Math.random() * 4) + 1] + ")"
+    awayrate[a1] = parseInt(awayrate[a1]) + 2;
+}
+else if(ag==2){
+    var aca = [a[0], a[1]];
+    var ca = arraySort(aca);
+    document.getElementById("a_scorer1").innerHTML = scorer_a[0] + " (" + ca[0] + ")"
+    document.getElementById("a_scorer2").innerHTML = scorer_a[1] + " (" + ca[1] + ")"
+    awayrate[a1] = parseInt(awayrate[a1]) + 2;
+    awayrate[a2] = parseInt(awayrate[a2]) + 2;
+}
+else if(ag==3){
+    var aca = [a[0], a[1], a[2]];
+    var ca = arraySort(aca);
+    document.getElementById("a_scorer1").innerHTML = scorer_a[0] + " (" + ca[0] + ")"
+    document.getElementById("a_scorer2").innerHTML = scorer_a[1] + " (" + ca[1] + ")"
+    document.getElementById("a_scorer3").innerHTML = scorer_a[2] + " (" + ca[2] + ")"
+    awayrate[a1] = parseInt(awayrate[a1]) + 2;
+    awayrate[a2] = parseInt(awayrate[a2]) + 2;
+    awayrate[a3] = parseInt(awayrate[a3]) + 2;
+}
+else if(ag==4){
+    var aca = [a[0], a[1], a[2], a[3]];
+    var ca = arraySort(aca);
+    document.getElementById("a_scorer1").innerHTML = scorer_a[0] + " (" + ca[0] + ")"
+    document.getElementById("a_scorer2").innerHTML = scorer_a[1] + " (" + ca[1] + ")"
+    document.getElementById("a_scorer3").innerHTML = scorer_a[2] + " (" + ca[2] + ")"
+    document.getElementById("a_scorer4").innerHTML = scorer_a[3] + " (" + ca[3] + ")"
+    awayrate[a1] = parseInt(awayrate[a1]) + 2;
+    awayrate[a2] = parseInt(awayrate[a2]) + 2;
+    awayrate[a3] = parseInt(awayrate[a3]) + 2;
+    awayrate[a4] = parseInt(awayrate[a4]) + 2;
+}
+else if (ag==5){
+    var at = arraySort(a);
+    document.getElementById("a_scorer1").innerHTML = scorer_a[0] + " (" + at[0] + ")"
+    document.getElementById("a_scorer2").innerHTML = scorer_a[1] + " (" + at[1] + ")"
+    document.getElementById("a_scorer3").innerHTML = scorer_a[2] + " (" + at[2] + ")"
+    document.getElementById("a_scorer4").innerHTML = scorer_a[3] + " (" + at[3] + ")"
+    document.getElementById("a_scorer5").innerHTML = scorer_a[4] + " (" + at[4] + ")"
+    awayrate[a1] = parseInt(awayrate[a1]) + 2;
+    awayrate[a2] = parseInt(awayrate[a2]) + 2;
+    awayrate[a3] = parseInt(awayrate[a3]) + 2;
+    awayrate[a4] = parseInt(awayrate[a4]) + 2;
+    awayrate[a5] = parseInt(awayrate[a5]) + 2;
+}
+//Yellow Cards Display Max:7
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+var homelist = [1,2,3,4,5,6,7,8,9,10,11];
+var awaylist = [1,2,3,4,5,6,7,8,9,10,11];
+shuffle(homelist);
+shuffle(awaylist);
+var i;
+for (i = 0; i < hy; i++){
+    var name="hc" + homelist[0];
+    document.getElementById(name).style.backgroundColor = "yellow";
+    var plr = parseInt(homelist[0])-1;
+    homerate[plr] = parseInt(homerate[plr])-2;
+    homelist.shift();
+}
+
+var i;
+for (i = 0; i < ay; i++){
+    var name="ac" + awaylist[0];
+    document.getElementById(name).style.backgroundColor = "yellow";
+    var plr = parseInt(awaylist[0])-1;
+    awayrate[plr] = parseInt(awayrate[plr])-2;
+    awaylist.shift();
+}
+//Red Cards Display
+if (hr==1){
+    var select_red = Math.floor((Math.random()*11)+1);
+    if (select_red==1){document.getElementById("hc1").style.backgroundColor = "red";}
+    if (select_red==2){document.getElementById("hc2").style.backgroundColor = "red";}
+    if (select_red==3){document.getElementById("hc3").style.backgroundColor = "red";}
+    if (select_red==4){document.getElementById("hc4").style.backgroundColor = "red";}
+    if (select_red==5){document.getElementById("hc5").style.backgroundColor = "red";}
+    if (select_red==6){document.getElementById("hc6").style.backgroundColor = "red";}
+    if (select_red==7){document.getElementById("hc7").style.backgroundColor = "red";}
+    if (select_red==8){document.getElementById("hc8").style.backgroundColor = "red";}
+    if (select_red==9){document.getElementById("hc9").style.backgroundColor = "red";}
+    if (select_red==10){document.getElementById("hc10").style.backgroundColor = "red";}
+    if (select_red==11){document.getElementById("hc11").style.backgroundColor = "red";}
+    var rh = select_red-1;
+    homerate[rh] = homerate[rh]-4;
+
+}
+
+if (ar==1){
+    var select_red_a = Math.floor((Math.random()*11)+1);
+    if (select_red_a==1){document.getElementById("ac1").style.backgroundColor = "red";}
+    if (select_red_a==2){document.getElementById("ac2").style.backgroundColor = "red";}
+    if (select_red_a==3){document.getElementById("ac3").style.backgroundColor = "red";}
+    if (select_red_a==4){document.getElementById("ac4").style.backgroundColor = "red";}
+    if (select_red_a==5){document.getElementById("ac5").style.backgroundColor = "red";}
+    if (select_red_a==6){document.getElementById("ac6").style.backgroundColor = "red";}
+    if (select_red_a==7){document.getElementById("ac7").style.backgroundColor = "red";}
+    if (select_red_a==8){document.getElementById("ac8").style.backgroundColor = "red";}
+    if (select_red_a==9){document.getElementById("ac9").style.backgroundColor = "red";}
+    if (select_red_a==10){document.getElementById("ac10").style.backgroundColor = "red";}
+    if (select_red_a==11){document.getElementById("ac11").style.backgroundColor = "red";}
+    var ra = select_red_a-1;
+    awayrate[ra] = awayrate[ra]-4;
+
+}
+
+
+
+function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+
+    var max = arr[0];
+    var maxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+
+    return maxIndex;
+}
+
+var hmi = indexOfMax(homerate);
+var ami = indexOfMax(awayrate);
+//Man Of The Match
+var homehigh = homerate[hmi];
+var awayhigh = awayrate[ami];
+
+if (homehigh>awayhigh){
+    var motm = homesquad[hmi];
+    document.getElementById("_player_").innerHTML = motm;
+}
+else if(homehigh<awayhigh){
+    var motm = awaysquad[ami];
+    document.getElementById("_player_").innerHTML = motm;
+}
+else{
+    var gen = Math.floor(Math.random() * 2) + 1;
+    if (gen==1){
+        var motm = homesquad[hmi];
+        document.getElementById("_player_").innerHTML = motm;
+    }
+    else if(gen==2){
+        var motm = awaysquad[ami];
+        document.getElementById("_player_").innerHTML = motm;
+    }
+}
+//Form
+var f1 = localStorage.getItem("f1");
+var f2 = localStorage.getItem("f2");
+var f3 = localStorage.getItem("f3");
+var f4 = localStorage.getItem("f4");
+var f5 = localStorage.getItem("f5");
+if (f1==null){
+    f1 = "-"
+}
+if (f2==null){
+    f2 = "-"
+}
+if (f3==null){
+    f3 = "-"
+}
+if (f4==null){
+    f4 = "-"
+}
+if (f5==null){
+    f5 = "-"
+}
+
+if (f1=="w"){
+    document.getElementById("form1").innerHTML = "W";
+    document.getElementById("form1").setAttribute("class", "form-w");
+}
+else if (f1=="l"){
+    document.getElementById("form1").innerHTML = "L";
+    document.getElementById("form1").setAttribute("class", "form-l");
+}
+else if (f1=="d"){
+    document.getElementById("form1").innerHTML = "D";
+    document.getElementById("form1").setAttribute("class", "form-d");
+}
+else if (f1=="-"){
+    document.getElementById("form1").innerHTML = "-";
+    document.getElementById("form1").setAttribute("class", "form");
+}
+
+if (f2=="w"){
+    document.getElementById("form2").innerHTML = "W";
+    document.getElementById("form2").setAttribute("class", "form-w");
+}
+else if (f2=="l"){
+    document.getElementById("form2").innerHTML = "L";
+    document.getElementById("form2").setAttribute("class", "form-l");
+}
+else if (f2=="d"){
+    document.getElementById("form2").innerHTML = "D";
+    document.getElementById("form2").setAttribute("class", "form-d");
+}
+else if (f2=="-"){
+    document.getElementById("form2").innerHTML = "-";
+    document.getElementById("form2").setAttribute("class", "form");
+}
+
+if (f3=="w"){
+    document.getElementById("form3").innerHTML = "W";
+    document.getElementById("form3").setAttribute("class", "form-w");
+}
+else if (f3=="l"){
+    document.getElementById("form3").innerHTML = "L";
+    document.getElementById("form3").setAttribute("class", "form-l");
+}
+else if (f3=="d"){
+    document.getElementById("form3").innerHTML = "D";
+    document.getElementById("form3").setAttribute("class", "form-d");
+}
+else if (f3=="-"){
+    document.getElementById("form3").innerHTML = "-";
+    document.getElementById("form3").setAttribute("class", "form");
+}
+
+if (f4=="w"){
+    document.getElementById("form4").innerHTML = "W";
+    document.getElementById("form4").setAttribute("class", "form-w");
+}
+else if (f4=="l"){
+    document.getElementById("form4").innerHTML = "L";
+    document.getElementById("form4").setAttribute("class", "form-l");
+}
+else if (f4=="d"){
+    document.getElementById("form4").innerHTML = "D";
+    document.getElementById("form4").setAttribute("class", "form-d");
+}
+else if (f4=="-"){
+    document.getElementById("form4").innerHTML = "-";
+    document.getElementById("form4").setAttribute("class", "form");
+}
+
+if (f5=="w"){
+    document.getElementById("form5").innerHTML = "W";
+    document.getElementById("form5").setAttribute("class", "form-w");
+}
+else if (f5=="l"){
+    document.getElementById("form5").innerHTML = "L";
+    document.getElementById("form5").setAttribute("class", "form-l");
+}
+else if (f5=="d"){
+    document.getElementById("form5").innerHTML = "D";
+    document.getElementById("form5").setAttribute("class", "form-d");
+}
+else if (f5=="-"){
+    document.getElementById("form5").innerHTML = "-";
+    document.getElementById("form5").setAttribute("class", "form");
+}
+
+localStorage.setItem("f1", f2);
+localStorage.setItem("f2", f3);
+localStorage.setItem("f3", f4);
+localStorage.setItem("f4", f5);
+
+if (hg>ag){
+    localStorage.setItem("f5", "w");
+}
+else if (hg==ag){
+    localStorage.setItem("f5", "d");
+}
+else if(hg<ag){
+    localStorage.setItem("f5", "l");
+}
+var f1 = localStorage.getItem("f1");
+var f2 = localStorage.getItem("f2");
+var f3 = localStorage.getItem("f3");
+var f4 = localStorage.getItem("f4");
+var f5 = localStorage.getItem("f5");
+if (f1==null){
+    f1 = "-"
+}
+if (f2==null){
+    f2 = "-"
+}
+if (f3==null){
+    f3 = "-"
+}
+if (f4==null){
+    f4 = "-"
+}
+if (f5==null){
+    f5 = "-"
+}
+
+if (f1=="w"){
+    document.getElementById("form1").innerHTML = "W";
+    document.getElementById("form1").setAttribute("class", "form-w");
+}
+else if (f1=="l"){
+    document.getElementById("form1").innerHTML = "L";
+    document.getElementById("form1").setAttribute("class", "form-l");
+}
+else if (f1=="d"){
+    document.getElementById("form1").innerHTML = "D";
+    document.getElementById("form1").setAttribute("class", "form-d");
+}
+else if (f1=="-"){
+    document.getElementById("form1").innerHTML = "-";
+    document.getElementById("form1").setAttribute("class", "form");
+}
+
+if (f2=="w"){
+    document.getElementById("form2").innerHTML = "W";
+    document.getElementById("form2").setAttribute("class", "form-w");
+}
+else if (f2=="l"){
+    document.getElementById("form2").innerHTML = "L";
+    document.getElementById("form2").setAttribute("class", "form-l");
+}
+else if (f2=="d"){
+    document.getElementById("form2").innerHTML = "D";
+    document.getElementById("form2").setAttribute("class", "form-d");
+}
+else if (f2=="-"){
+    document.getElementById("form2").innerHTML = "-";
+    document.getElementById("form2").setAttribute("class", "form");
+}
+
+if (f3=="w"){
+    document.getElementById("form3").innerHTML = "W";
+    document.getElementById("form3").setAttribute("class", "form-w");
+}
+else if (f3=="l"){
+    document.getElementById("form3").innerHTML = "L";
+    document.getElementById("form3").setAttribute("class", "form-l");
+}
+else if (f3=="d"){
+    document.getElementById("form3").innerHTML = "D";
+    document.getElementById("form3").setAttribute("class", "form-d");
+}
+else if (f3=="-"){
+    document.getElementById("form3").innerHTML = "-";
+    document.getElementById("form3").setAttribute("class", "form");
+}
+
+if (f4=="w"){
+    document.getElementById("form4").innerHTML = "W";
+    document.getElementById("form4").setAttribute("class", "form-w");
+}
+else if (f4=="l"){
+    document.getElementById("form4").innerHTML = "L";
+    document.getElementById("form4").setAttribute("class", "form-l");
+}
+else if (f4=="d"){
+    document.getElementById("form4").innerHTML = "D";
+    document.getElementById("form4").setAttribute("class", "form-d");
+}
+else if (f4=="-"){
+    document.getElementById("form4").innerHTML = "-";
+    document.getElementById("form4").setAttribute("class", "form");
+}
+
+if (f5=="w"){
+    document.getElementById("form5").innerHTML = "W";
+    document.getElementById("form5").setAttribute("class", "form-w");
+}
+else if (f5=="l"){
+    document.getElementById("form5").innerHTML = "L";
+    document.getElementById("form5").setAttribute("class", "form-l");
+}
+else if (f5=="d"){
+    document.getElementById("form5").innerHTML = "D";
+    document.getElementById("form5").setAttribute("class", "form-d");
+}
+else if (f5=="-"){
+    document.getElementById("form5").innerHTML = "-";
+    document.getElementById("form5").setAttribute("class", "form");
+}
+//Coins
+var coins = localStorage.getItem("coins");
+var balance = parseInt(coins);
+document.getElementById("coins").innerHTML = balance;
+if (hg>ag){
+    balance = balance+1;
+    window.localStorage.setItem("coins", balance);
+    document.getElementById("coins").innerHTML = balance;
+}
+else if (hg<ag){
+    if (balance>0){
+        balance = balance-1;
+        window.localStorage.setItem("coins", balance);
+        document.getElementById("coins").innerHTML = balance;
+    }
+}
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById("modal1");
+
+// Get the button that opens the modal
+var btn = document.getElementById("_detail_");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function openmenu(){
+    document.getElementById("open").style.display = "none";
+    document.getElementById("close").style.display = "block";
+    document.getElementById("menuopt").style.height = "125px";
+}
+function closemenu(){
+    document.getElementById("close").style.display = "none";
+    document.getElementById("open").style.display = "block";
+    document.getElementById("menuopt").style.height = "0px";
+}
+function openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+    //DISABLE CODE INSPECT
+    document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+    return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+    return false;
+    }
+    }
+
+function load(){
+    var yn = window.sessionStorage.getItem("developer");
+        if (yn=="true"){
+            document.getElementById("report").style.display = "block";
+            document.getElementById("suggest").style.display = "block";
+        }
+        else{
+            document.getElementById("report").style.display = "none";
+            document.getElementById("suggest").style.display = "none";
+        }
+}
+for(var b in window) { 
+  if(window.hasOwnProperty(b)) console.log(b); 
+}
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154961855-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154961855-1');
+</script>
